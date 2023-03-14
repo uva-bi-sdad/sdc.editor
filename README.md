@@ -1,6 +1,6 @@
 # sdc.editor
 
-This repo provides automated edits for miscellaneous tasks. The editor is expected to perform edits in the following sequence:
+This repo provides automated edits for miscellaneous tasks maintaining data repositories. The editor is expected to perform edits in the following sequence:
 
 1. **Create or update ```manifest.json```**: 
     - Creates or overrides a ```manifest.json``` at the root directory with the: hash, file size (bytes), and file path of each file, by looping through all folders that match ```**/distribution/``` 
