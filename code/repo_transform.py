@@ -25,52 +25,6 @@ def exception_handler(func):
     return wrapper
 
 
-@exception_handler
-def delete_all_empty_measure_infos(root_dir, test):
-    """
-    If a file suffix is found under a distribution under a data directory and measure_info does not exist, create a temporary one
-    """
-    logging.info("=" * 80)
-    measure_info_deleted = []
-    for path in Path(root_dir).rglob("data/distribution/**/*"):
-        parent_dir = path.parent
-        if "measure_info.json" in os.listdir(parent_dir):
-            measure_path = os.path.abspath(
-                os.path.join(parent_dir, "measure_info.json")
-            )
-            if os.stat(measure_path).st_size <= 0:
-                os.remove(measure_path)
-                measure_info_deleted.append(measure_path)
-    logging.info(
-        "[%s] Empty measure files deleted: %s"
-        % (len(measure_info_deleted), measure_info_deleted)
-    )
-
-
-@exception_handler
-def fix_list_measure_infos(root_dir, test):
-    """
-    If a file suffix is found under a distribution under a data directory and measure_info does not exist, create a temporary one
-    """
-    logging.info("=" * 80)
-    measure_info_generated = []
-    for path in Path(root_dir).rglob("data/distribution/**/*"):
-        logging.info("Checking %s" % path)
-        parent_dir = path.parent
-        logging.debug(
-            "\t[%s]: %s" % (not path.suffix in settings.SUFFIX_TO_MEASURE, path.suffix)
-        )
-        logging.debug(
-            "\t[%s]: %s" % ("measure_info.json" in os.listdir(parent_dir), parent_dir)
-        )
-        if "measure_info.json" in os.listdir(parent_dir):
-            measure_path = os.path.abspath(
-                os.path.join(parent_dir, "measure_info.json")
-            )
-            logging.info("checking: %s" % measure_path)
-            fix_list_measure_info(measure_path)
-
-
 def enforce_directory(root, dir, test):
     """
     assuming you are in a repository like data, docs, or code

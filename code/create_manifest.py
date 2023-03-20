@@ -183,5 +183,7 @@ if __name__ == "__main__":
     if not os.path.isdir(args.input_root):
         logging.info("%s is not a directory", (args.input_root))
     else:
-        logging.info("Auditing: %s", os.path.abspath(args.input_root))
+        logging.info(
+            "Creating a manifest file for: %s", os.path.abspath(args.input_root)
+        )
         main(args.input_root, args.test)
