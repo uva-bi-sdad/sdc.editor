@@ -3,7 +3,8 @@
 This repo provides automated edits for miscellaneous tasks maintaining data repositories. The editor is expected to perform edits in the following sequence:
 
 1. **Auto generate directory structures**:
-    - If ```**/distribution``` is found, the editor additionally creates `code`, `data`, and `docs` folders underneath them for any one missing
+    - If `code`, `data`, or `docs` folder is found, look in it for a `distribution` folder
+    - If the `distribution` folder underneath `code`, `data`, or `docs` is empty, auto generates an empty `temp` file
 2. **Create a placeholder `measure_info.json` files**: 
     - Loop through each `**/distribution/`. If a `*.csv.xz` is found, but a `measure_info.json` was not found in the same directory, create an empty placeholder `measure_info_temp.json`
     - If a `measure_info.json` is found but is empty, rename it to `measure_info_temp.json`
