@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 *.DS_Store
-data/*
 manifest.json
 sdad_data_auditor/*
 
