@@ -87,7 +87,7 @@ def generate_placeholder_folders(root_dir, test):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Assuming you are in a repository that contains data, docs, or code directories, check if 'distribution' is in the folder. If not, create one and put an empty temp file in it. Otherwise, skip and don't do anything. At the end of this edit, there should be at least a distribution folder for each code, data, and docs folder"
+        description="Given a directory, checks if there exists a structure where it is {code, data, docs}/distribution/<any_file>. If exists, populates also code/distribution/temp, data/distribution/temp, or docs/distribution/temp as needed"
     )
     parser.add_argument(
         "-i",
