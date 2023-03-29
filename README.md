@@ -11,5 +11,7 @@ This repo provides automated edits for miscellaneous tasks maintaining data repo
 3. **Update existing `measure_info.json` files**: 
     - Search for ```*.csv.xz``` in the same directory, and check for a string match of the measure and the file name. If there is a match, appends the new elements into the ```measure_info.json```
     - Checks the `measure_info_template.json`, if there are elements that do not have required keys, appends those keys with values equal to `''`. Actual measures that need to be modified will be shown in the downstream tests
-4. **Creates a ```manifest.json```**: 
+4. **Remove all non-required columns**:
+    - Iterate through each data file and strip all extra data to export to the public repositories
+5. **Creates a ```manifest.json```**: 
     - Creates or overrides a ```manifest.json``` at the root directory with the: hash, file size (bytes), and file path of each file by looping through all folders that match ```**/distribution/``` 
