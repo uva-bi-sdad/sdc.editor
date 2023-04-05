@@ -61,11 +61,11 @@ def add_measure_info_key(root_dir, req_keys):
                 continue
             
             # add key
-            mi[var]['test_key'] = 'test_value'                
+            mi[var]['test_key'] = 'test_value2'                
 
         # write back  
         with open(path.resolve(), 'w') as f:
-            json.dump(mi, f)
+            json.dump(mi, f, indent=4)
 
     return 
 
