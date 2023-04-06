@@ -26,9 +26,9 @@ def exception_handler(func):
     return wrapper
 
 @exception_handler
-def add_measure_info_key(root_dir, req_keys):
+def delete_measure_info_keys(root_dir, req_keys):
     """
-    Add test key to each measure_info.json file
+    Delete extra keys in each measure_info.json file
     """
     logging.debug("=" * 80)
 
@@ -40,10 +40,8 @@ def add_measure_info_key(root_dir, req_keys):
         if not os.path.isfile(path):
             # if path is not a file, skip to the next file to check
             continue
-                
-        full_path = path.name
             
-        if full_path not in ["measure_info.json"]:
+        if path.name not in ["measure_info.json"]:
             # if file is not a measure info file, skip to next
             continue
 
@@ -54,18 +52,37 @@ def add_measure_info_key(root_dir, req_keys):
        
         # get measure info keys for each variable
 
+        updated = 0  # tracks if file is updated and needs to be rewritten
+        
         for var in mi.keys():
                 
             # skip references entries
             if var == "_references":
                 continue
             
-            # add key
-            mi[var]['test_key'] = 'test_value2'                
+            key_list = list(mi[var].keys())
 
-        # write back  
-        with open(path.resolve(), 'w') as f:
-            json.dump(mi, f, indent=4)
+            # check for extra keys
+            extra_keys = list(set(key_list).difference(set(req_keys)))
+            
+            if len(extra_keys) > 0:
+            
+                # delete extra keys
+                for i in range(len(extra_keys)):
+                    mi[var].pop(extra_keys[i])    
+                
+                # sort keys 
+                updated_keys = list(set(key_list).difference(set(extra_keys)))
+                updated_keys.sort()
+                sorted_dict = {i: mi[var][i] for i in updated_keys}
+                mi[var] = sorted_dict     
+                
+                updated = 1
+            
+        # write back updates to measure_info file
+        if updated:      
+            with open(path.resolve(), 'w') as f:
+                json.dump(mi, f, indent=4)
 
     return 
 
@@ -73,13 +90,13 @@ def add_measure_info_key(root_dir, req_keys):
 if __name__ == "__main__":
     
     with urllib.request.urlopen(
-        "https://raw.githubusercontent.com/uva-bi-sdad/data_repo_structure/main/measure_structure.json"
+        "https://raw.githubusercontent.com/uva-bi-sdad/sdc.metadata/master/src/data_repo_structure/measure_structure.json"
     ) as url:
         req_keys = json.load(url)
     
     
     parser = argparse.ArgumentParser(
-        description="Given a directory, adds a test key to each measure_info.json in a data/distribution folder."
+        description="Given a directory, deletes extra keys in each measure_info.json in a data/distribution folder."
     )
     parser.add_argument(
         "-i",
@@ -101,5 +118,5 @@ if __name__ == "__main__":
     if not os.path.isdir(args.input_root):
         logging.info("%s is not a directory", (args.input_root))
     else:
-        add_measure_info_key(args.input_root, req_keys)
+        delete_measure_info_keys(args.input_root, req_keys)
 
