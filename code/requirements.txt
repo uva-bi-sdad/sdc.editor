@@ -137,7 +137,7 @@ trio-websocket==0.9.2
 tzdata==2022.7
 tzlocal==4.2
 uri-template==1.2.0
-urllib3==1.26.13
+urllib3==1.26.17
 wcwidth==0.2.5
 webcolors==1.12
 webdriver-manager==3.8.5
