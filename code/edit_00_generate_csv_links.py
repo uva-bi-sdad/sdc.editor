@@ -28,7 +28,7 @@ def generate_link_json(root_dir, cols):
     for file in pbar:
         try:
             df = pd.read_csv(file)
-            assert set(df.columns).issubset(cols)
+            assert set(cols).issubset(df.columns)
             last_mod_time = datetime.utcfromtimestamp(os.path.getmtime(file)).strftime(
                 "%Y-%m-%d_%H:%M:%S"
             )
