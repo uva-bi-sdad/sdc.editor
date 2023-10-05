@@ -21,8 +21,8 @@ import requests
 def generate_link_json(root_dir, cols):
     j = []
     p = sorted(
-        list(pathlib.Path(root_dir).glob("**/*.csv.xz"))
-        + list(pathlib.Path(root_dir).glob("**/*.csv"))
+        list(pathlib.Path(root_dir).glob("**/distribution/*.csv.xz"))
+        + list(pathlib.Path(root_dir).glob("**/distribution/*.csv"))
     )
     pbar = tqdm(p)
     for file in pbar:
