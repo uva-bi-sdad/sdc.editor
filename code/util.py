@@ -8,6 +8,19 @@ import traceback
 import os
 import json
 
+
+def exception_handler(func):
+    def wrapper(*args, **kwargs):
+        try:
+            print("-" * 80)
+            func(*args, **kwargs)
+            print("-" * 80)
+        except Exception:
+            print(traceback.format_exc())
+
+    return wrapper
+
+
 # since measure_info files have two different formats, use recursion to look for measure_table is version agnostic
 def _finditems(obj, key):
     if key in obj:

@@ -5,6 +5,7 @@ import logging
 from pathlib import Path
 import settings
 from datetime import datetime
+from util import exception_handler
 import util
 from pprint import pprint
 import traceback
@@ -14,18 +15,6 @@ import traceback
 Given the path to a directory, generate a manifest file
 [Finding files recursively] https://stackoverflow.com/questions/2186525/how-to-use-glob-to-find-files-recursively
 """
-
-
-def exception_handler(func):
-    def wrapper(*args, **kwargs):
-        try:
-            print("-" * 80)
-            func(*args, **kwargs)
-            print("-" * 80)
-        except Exception as e:
-            print(traceback.format_exc())
-
-    return wrapper
 
 
 def evaluate_folder(answer, dirpath):

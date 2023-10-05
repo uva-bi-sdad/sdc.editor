@@ -7,22 +7,11 @@ from pathlib import Path
 import traceback
 import settings
 from datetime import datetime
-import util
+from util import exception_handler
 from pprint import pprint
 import pandas as pd
 import os
 import sys
-
-
-def exception_handler(func):
-    def wrapper(*args, **kwargs):
-        try:
-            logging.debug("-" * 80)
-            return func(*args, **kwargs)
-        except Exception:
-            logging.debug(traceback.format_exc())
-
-    return wrapper
 
 
 def enforce_directory(root, dir, test):
