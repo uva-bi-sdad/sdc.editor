@@ -24,3 +24,4 @@ MEASURE_KEYS = [
     "equity_category",
     "sources",
 ]
+COLUMN_REF_URL = "https://raw.githubusercontent.com/uva-bi-sdad/sdc.metadata/master/data/column_structure.json"

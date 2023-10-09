@@ -25,13 +25,26 @@ def straighten_csvs(root_dir, expected_col_order):
     for file in pbar:
         try:
             df = pd.read_csv(file, dtype={"geoid": object})
-            assert set(expected_col_order) == set(
-                df.columns
-            )  # Only reorder if columns exactly match
-            df = df[expected_col_order]
+            if df.empty:  # skip empty data frames
+                continue
+            assert set(expected_col_order).issubset(df.columns), print(df.columns)
+            if (  # Skip if columns are already in order
+                list(df.columns)[: len(expected_col_order)] == expected_col_order
+            ):
+                pbar.set_description("Columns already in order: %s" % df.columns)
+                continue
+
+            df = df[  # re-order the columns and keep the additional ones
+                expected_col_order + list(set(df.columns) - set(expected_col_order))
+            ]
+            assert (
+                list(df.columns)[: len(expected_col_order)] == expected_col_order
+            ), logging.error(list(df.columns)[: len(expected_col_order)])
+            pbar.set_description("edited columns: %s" % df.columns)
             df.to_csv(file, index=False)
-            logging.info("File straightened: %s" % file)
+            logging.debug("File straightened: %s" % file)
         except Exception as e:
+            logging.debug("Edit failed: %s, %s" % (file, traceback.format_exc()))
             continue
 
 
@@ -58,8 +71,6 @@ if __name__ == "__main__":
     if not os.path.isdir(args.input_root):
         logging.info("%s is not a directory", (args.input_root))
 
-    anticipated_cols = requests.get(
-        "https://raw.githubusercontent.com/uva-bi-sdad/sdc.metadata/master/data/column_structure.json"
-    ).json()
+    anticipated_cols = requests.get(settings.COLUMN_REF_URL).json()
     logging.info(anticipated_cols)
     j = straighten_csvs(args.input_root, anticipated_cols)

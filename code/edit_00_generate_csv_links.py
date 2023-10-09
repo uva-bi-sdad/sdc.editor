@@ -63,9 +63,7 @@ if __name__ == "__main__":
     if not os.path.isdir(args.input_root):
         logging.info("%s is not a directory", (args.input_root))
 
-    anticipated_cols = requests.get(
-        "https://raw.githubusercontent.com/uva-bi-sdad/sdc.metadata/master/data/column_structure.json"
-    ).json()
+    anticipated_cols = requests.get(settings.COLUMN_REF_URL).json()
     logging.debug(anticipated_cols)
     j = generate_link_json(args.input_root, anticipated_cols)
 
