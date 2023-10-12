@@ -83,7 +83,7 @@ def add_measure_info_keys(root_dir, req_keys, req_source_keys):
                     updated_source_keys = list(set(source_key_list).union(set(missing_source_keys)))
                     updated_source_keys.sort()
                     sorted_source_dict = {j: mi[var]["sources"][i][j] for j in updated_source_keys}
-                    mi[var]["sources"][i] = sorted_dict
+                    mi[var]["sources"][i] = sorted_source_dict
 
                     updated = 1
 
