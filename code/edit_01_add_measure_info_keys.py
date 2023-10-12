@@ -16,7 +16,7 @@ import urllib.request
 
 
 @exception_handler
-def add_measure_info_keys(root_dir, req_keys):
+def add_measure_info_keys(root_dir, req_keys, req_source_keys):
     """
     Add missing keys to each measure_info.json file
     """
@@ -67,6 +67,26 @@ def add_measure_info_keys(root_dir, req_keys):
 
                 updated = 1
 
+            # check for missing source keys
+            sources_list = mi[var]["sources"]
+
+            for i in range(len(sources_list)):
+                source_key_list = list(mi[var]["sources"][i].keys())
+                missing_source_keys = list(set(req_source_keys).difference(set(source_key_list)))
+
+                if len(missing_source_keys) > 0:
+                    # add missing keys
+                    for j in range(len(missing_source_keys)):
+                        mi[var]["sources"][i][missing_source_keys[j]] = ""
+
+                    # sort source keys
+                    updated_source_keys = list(set(source_key_list).union(set(missing_source_keys)))
+                    updated_source_keys.sort()
+                    sorted_source_dict = {j: mi[var]["sources"][i][j] for j in updated_source_keys}
+                    mi[var]["sources"][i] = sorted_source_dict
+
+                    updated = 1
+
         # write back updates to measure_info file
         if updated:
             with open(path.resolve(), "w") as f:
@@ -81,6 +101,11 @@ if __name__ == "__main__":
     ) as url:
         req_keys = json.load(url)
 
+    with urllib.request.urlopen(
+        "https://raw.githubusercontent.com/uva-bi-sdad/sdc.metadata/master/data/source_structure.json"
+    ) as url:
+        req_source_keys = json.load(url)
+    
     parser = argparse.ArgumentParser(
         description="Given a directory, adds missing keys to each measure_info.json in a data/distribution folder."
     )
@@ -104,4 +129,4 @@ if __name__ == "__main__":
     if not os.path.isdir(args.input_root):
         logging.info("%s is not a directory", (args.input_root))
     else:
-        add_measure_info_keys(args.input_root, req_keys)
+        add_measure_info_keys(args.input_root, req_keys, req_source_keys)
