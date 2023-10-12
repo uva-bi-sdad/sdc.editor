@@ -110,6 +110,6 @@ if __name__ == "__main__":
     )
 
     anticipated_cols = requests.get(settings.COLUMN_REF_URL).json()
-    anticipated_cols.remove("moe")
+    # anticipated_cols.remove("moe")
     logging.info(anticipated_cols)
     j = export_variable_csvs(args.input_root, args.output_dir, anticipated_cols)
