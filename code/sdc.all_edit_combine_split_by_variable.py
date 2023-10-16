@@ -30,6 +30,11 @@ def export_variable_csvs(root_dir, export_dir, expected_col_order):
             pbar.set_description("[%s] Reading %s" % (len(dfs), file.name))
             if df.empty:  # skip empty data frames
                 continue
+
+            # Try to add in columns if there are insufficient ones
+            df = df.reindex(columns=expected_col_order)
+
+            # A dataset is only acceptable if it has a minimum number of expected columns
             assert set(expected_col_order).issubset(df.columns), print(df.columns)
             if len(df["measure"].unique()) > 1:
                 logging.info("[%s]: %s" % (file.name, len(df["measure"].unique())))
