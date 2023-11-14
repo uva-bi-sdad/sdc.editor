@@ -50,12 +50,13 @@ def cull_extra_measures(root_dir, expected_col_order):
         with open(view, "r") as f:
             j = json.load(f)
         measures = set(j["variables"])
-        starting_count = len(measures)
+
         # all allow measures that exist
-        measures = measures.intersection(all_measures)
+        resulting_measures = measures.intersection(all_measures)
+        logging.info("Removing: %s" % (measures ^ resulting_measures))
         logging.info(
-            "Number of measures removed from %s: %s"
-            % (view, starting_count - len(measures))
+            "\tNumber of measures removed from %s: %s"
+            % (view, len(measures) - len(resulting_measures))
         )
         # edit the variables list
         j["variables"] = sorted(list(measures))
