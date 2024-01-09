@@ -35,7 +35,7 @@ executing==1.2.0
 fastjsonschema==2.16.2
 Fiona==1.9.1
 folium==0.14.0
-fonttools==4.38.0
+fonttools==4.43.0
 fqdn==1.5.1
 fuzzywuzzy==0.18.0
 geographiclib==2.0
