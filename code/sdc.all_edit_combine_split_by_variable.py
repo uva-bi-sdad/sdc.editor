@@ -63,7 +63,7 @@ def export_variable_csvs(root_dir, export_dir, expected_col_order):
     for pdf in tqdm(L):
         export_path = os.path.join(
             export_dir,
-            "{measure_name}.csv.xz".format(measure_name=pdf["measure"].values[0]),
+            "{measure_name}.zip".format(measure_name=pdf["measure"].values[0]),
         )
         pdf.to_csv(export_path, index=False)
     # for m in pbar:
