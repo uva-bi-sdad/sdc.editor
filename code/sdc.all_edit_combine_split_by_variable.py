@@ -65,7 +65,9 @@ def export_variable_csvs(root_dir, export_dir, expected_col_order):
             export_dir,
             "{measure_name}.zip".format(measure_name=pdf["measure"].values[0]),
         )
-        pdf.to_csv(export_path, index=False)
+        pdf.to_csv(export_path, compression={'method': 'zip', 'archive_name': "{measure_name}.csv".format(measure_name=pdf["measure"].values[0])}, index=False)
+        # pdf.to_csv(export_path, index=False)
+
     # for m in pbar:
     #     pdf = fdf[fdf["measure"] == m]
     #     fdf = fdf[fdf["measure"] != m]  # remove the rest from the equation
