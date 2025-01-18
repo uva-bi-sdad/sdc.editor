@@ -15,7 +15,7 @@ beautifulsoup4==4.11.1
 bleach==5.0.1
 bounded-pool-executor==0.0.3
 branca==0.6.0
-certifi==2023.7.22
+certifi==2024.7.4
 cffi==1.15.1
 charset-normalizer==2.1.1
 click==8.1.3
@@ -24,7 +24,7 @@ cligj==0.7.2
 comm==0.1.1
 contextily==1.3.0
 contourpy==1.0.6
-cryptography==41.0.4
+cryptography==43.0.1
 cycler==0.11.0
 debugpy==1.6.4
 decorator==5.1.1
@@ -33,9 +33,9 @@ entrypoints==0.4
 exceptiongroup==1.1.0
 executing==1.2.0
 fastjsonschema==2.16.2
-Fiona==1.9.1
+Fiona==1.10.0
 folium==0.14.0
-fonttools==4.38.0
+fonttools==4.43.0
 fqdn==1.5.1
 fuzzywuzzy==0.18.0
 geographiclib==2.0
@@ -52,7 +52,7 @@ ipython-genutils==0.2.0
 ipywidgets==8.0.2
 isoduration==20.11.0
 jedi==0.18.2
-Jinja2==3.1.2
+Jinja2==3.1.5
 joblib==1.2.0
 json5==0.9.14
 jsonpointer==2.3
@@ -93,11 +93,11 @@ overrides==7.4.0
 packaging==21.3
 pandas==1.5.0
 pandocfilters==1.5.0
-paramiko==3.1.0
+paramiko==3.4.0
 parso==0.8.3
 pexpect==4.8.0
 pickleshare==0.7.5
-Pillow==10.0.1
+Pillow==10.2.0
 platformdirs==2.5.4
 prometheus-client==0.15.0
 prompt-toolkit==3.0.33
@@ -150,8 +150,12 @@ terminado==0.17.0
 text-unidecode==1.3
 threadpoolctl==3.1.0
 tinycss2==1.2.1
+<<<<<<< HEAD
 tomli==2.2.1
 tornado==6.3.3
+=======
+tornado==6.4.2
+>>>>>>> d998b464a32212d128b1eed475fc95ec2e1a7d5b
 tqdm==4.66.1
 traitlets==5.6.0
 trio==0.22.0
@@ -160,7 +164,7 @@ typing_extensions==4.8.0
 tzdata==2022.7
 tzlocal==4.2
 uri-template==1.2.0
-urllib3==1.26.18
+urllib3==1.26.19
 wcwidth==0.2.5
 webcolors==24.11.1
 webdriver-manager==3.8.5
