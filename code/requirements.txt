@@ -33,7 +33,7 @@ entrypoints==0.4
 exceptiongroup==1.1.0
 executing==1.2.0
 fastjsonschema==2.16.2
-Fiona==1.9.1
+Fiona==1.10.0
 folium==0.14.0
 fonttools==4.43.0
 fqdn==1.5.1
