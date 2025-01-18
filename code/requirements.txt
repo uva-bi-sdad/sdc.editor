@@ -42,9 +42,7 @@ geographiclib==2.0
 geopandas==0.12.2
 geopy==2.3.0
 h11==0.14.0
-httpcore==1.0.7
-httpx==0.28.1
-idna==3.4
+idna==3.7
 importlib_metadata==8.5.0
 ipykernel==6.18.2
 ipython==8.10.0
