@@ -78,7 +78,6 @@ mercantile==1.2.1
 mistune==2.0.4
 munch==2.5.0
 nbclassic==0.4.8
-nbclient==0.7.1
 nbconvert==7.2.5
 nbformat==5.7.0
 nest-asyncio==1.5.6
