@@ -15,7 +15,7 @@ beautifulsoup4==4.11.1
 bleach==5.0.1
 bounded-pool-executor==0.0.3
 branca==0.6.0
-certifi==2023.7.22
+certifi==2024.7.4
 cffi==1.15.1
 charset-normalizer==2.1.1
 click==8.1.3
